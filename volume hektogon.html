@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Volume Prisma Segi-100</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input { width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Volume Prisma Segi-100</h2>
+    <label>Panjang Sisi Alas (s) dalam cm:</label>
+    <input type="number" id="sisi" placeholder="Contoh: 2">
+    
+    <label>Tinggi Prisma (h) dalam cm:</label>
+    <input type="number" id="tinggi" placeholder="Contoh: 10">
+    
+    <button onclick="hitungVolume()">Hitung Volume</button>
+    
+    <div class="result" id="hasil"></div>
+</div>
+
+<script>
+    function hitungVolume() {
+        // Ambil input
+        const s = parseFloat(document.getElementById('sisi').value);
+        const h = parseFloat(document.getElementById('tinggi').value);
+        const n = 100; // Segi-100
+
+        if (isNaN(s) || isNaN(h) || s <= 0 || h <= 0) {
+            document.getElementById('hasil').innerHTML = "Mohon masukkan angka yang valid.";
+            return;
+        }
+
+        // Rumus Luas Alas Segi-N Beraturan: (n * s^2) / (4 * tan(PI/n))
+        const luasAlas = (n * Math.pow(s, 2)) / (4 * Math.tan(Math.PI / n));
+        
+        // Volume = Luas Alas * Tinggi
+        const volume = luasAlas * h;
+
+        document.getElementById('hasil').innerHTML = 
+            `Luas Alas: ${luasAlas.toFixed(2)} cm&sup2;<br>` +
+            `Volume: ${volume.toFixed(2)} cm&sup3;`;
+    }
+</script>
+
+</body>
+</html>
